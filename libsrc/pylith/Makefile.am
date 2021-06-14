@@ -143,6 +143,7 @@ libpylith_la_SOURCES = \
 	problems/InitialConditionPatch.cc \
 	problems/ProgressMonitor.cc \
 	problems/ProgressMonitorTime.cc \
+	problems/ProgressMonitorStep.cc \
 	topology/Mesh.cc \
 	topology/MeshOps.cc \
 	topology/FieldBase.cc \
