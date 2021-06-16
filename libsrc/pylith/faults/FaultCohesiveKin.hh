@@ -168,8 +168,8 @@ protected:
 
     typedef std::map<std::string, KinSrc*> srcs_type;
 
-    // PRIVATE MEMBERS /////////////////////////////////////////////////////////////////////////////////////////////////
-private:
+    // PROTECTED MEMBERS //////////////////////////////////////////////////////////////////////////////////////////////
+protected:
 
     pylith::faults::AuxiliaryFactoryKinematic* _auxiliaryFactory; ///< Factory for auxiliary subfields.
     srcs_type _ruptures; ///< Array of kinematic earthquake ruptures.
