@@ -524,7 +524,7 @@ pylith::problems::TimeDependent::computeRHSResidual(PetscVec residualVec,
     assert(solutionVec);
     assert(_solution);
 
-    if (t != _tResidual) { _updateStateTime(t); }
+    if (t != _tResidual) { _setState(t, dt); }
 
     // Update PyLith view of the solution.
     PetscVec solutionDotVec = NULL;
@@ -564,7 +564,7 @@ pylith::problems::TimeDependent::computeLHSResidual(PetscVec residualVec,
     assert(solutionDotVec);
     assert(_solution);
 
-    if (t != _tResidual) { _updateStateTime(t); }
+    if (t != _tResidual) { _setState(t, dt); }
 
     // Update PyLith view of the solution.
     setSolutionLocal(t, solutionVec, solutionDotVec);
@@ -819,24 +819,25 @@ pylith::problems::TimeDependent::_needNewJacobian(const PylithReal dt) {
 // ---------------------------------------------------------------------------------------------------------------------
 // Set state (auxiliary field values) of system for time t.
 void
-pylith::problems::TimeDependent::_updateStateTime(const PylithReal t) {
+pylith::problems::TimeDependent::_setState(const PylithReal t,
+                                           const PylithReal dt) {
     PYLITH_METHOD_BEGIN;
-    PYLITH_COMPONENT_DEBUG("_updateStateTime(t=)"<<t);
+    PYLITH_COMPONENT_DEBUG("_setState(t=)"<<t);
 
     // Update constraint values to current time, t.
     const size_t numConstraints = _constraints.size();
     for (size_t i = 0; i < numConstraints; ++i) {
-        _constraints[i]->updateState(t);
+        _constraints[i]->setState(t, dt);
     } // for
 
     // Prepare integrators for a new time step.
     const size_t numIntegrators = _integrators.size();
     for (size_t i = 0; i < numIntegrators; ++i) {
-        _integrators[i]->updateState(t);
+        _integrators[i]->setState(t, dt);
     } // for
 
     PYLITH_METHOD_END;
-} // _updateStateTime
+} // _setState
 
 
 // ---------------------------------------------------------------------------------------------------------------------

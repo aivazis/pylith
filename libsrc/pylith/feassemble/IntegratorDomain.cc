@@ -20,6 +20,7 @@
 
 #include "IntegratorDomain.hh" // implementation of object methods
 
+#include "pylith/problems/Physics.hh" // USES Physics
 #include "pylith/feassemble/UpdateStateVars.hh" // HOLDSA UpdateStateVars
 #include "pylith/feassemble/DSLabelAccess.hh" // USES DSLabelAccess
 #include "pylith/topology/Mesh.hh" // USES Mesh
@@ -316,6 +317,32 @@ pylith::feassemble::IntegratorDomain::initialize(const pylith::topology::Field& 
 
     PYLITH_METHOD_END;
 } // initialize
+
+
+// ------------------------------------------------------------------------------------------------
+// Set auxiliary field values for current time.
+void
+pylith::feassemble::IntegratorDomain::setState(const PylithReal t,
+                                               const PylithReal dt) {
+    PYLITH_METHOD_BEGIN;
+    PYLITH_JOURNAL_DEBUG("setState(t="<<t<<", dt="<<dt<<")");
+
+    Integrator::setState(t, dt);
+
+    assert(_physics);
+    _physics->updateAuxiliaryField(_auxiliaryField, t, dt);
+
+    pythia::journal::debug_t debug(GenericComponent::getName());
+    if (debug.state()) {
+        assert(_auxiliaryField);
+        PYLITH_JOURNAL_DEBUG("IntegratorInterface component '" << GenericComponent::getName() << "' for '"
+                                                               <<_physics->getIdentifier()
+                                                               << "': viewing auxiliary field.");
+        _auxiliaryField->view("IntegratorInterface auxiliary field", pylith::topology::Field::VIEW_ALL);
+    } // if
+
+    PYLITH_METHOD_END;
+} // setState
 
 
 // ---------------------------------------------------------------------------------------------------------------------
