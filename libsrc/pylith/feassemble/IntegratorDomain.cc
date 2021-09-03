@@ -22,6 +22,7 @@
 
 #include "pylith/problems/Physics.hh" // USES Physics
 #include "pylith/feassemble/UpdateStateVars.hh" // HOLDSA UpdateStateVars
+#include "pylith/feassemble/JacobianValues.hh" // HOLDSA JacobianValues
 #include "pylith/feassemble/DSLabelAccess.hh" // USES DSLabelAccess
 #include "pylith/topology/Mesh.hh" // USES Mesh
 #include "pylith/topology/MeshOps.hh" // USES createSubdomainMesh()
@@ -73,7 +74,8 @@ extern "C" PetscErrorCode DMPlexComputeJacobian_Action_Internal(PetscDM,
 pylith::feassemble::IntegratorDomain::IntegratorDomain(pylith::problems::Physics* const physics) :
     Integrator(physics),
     _materialMesh(NULL),
-    _updateState(NULL) {
+    _updateState(NULL),
+    _jacobianValues(NULL) {
     GenericComponent::setName("integratordomain");
     _labelName = pylith::topology::Mesh::getCellsLabelName();
 } // constructor
@@ -96,6 +98,7 @@ pylith::feassemble::IntegratorDomain::deallocate(void) {
 
     delete _materialMesh;_materialMesh = NULL;
     delete _updateState;_updateState = NULL;
+    delete _jacobianValues;_jacobianValues = NULL;
 
     PYLITH_METHOD_END;
 } // deallocate
@@ -258,6 +261,17 @@ pylith::feassemble::IntegratorDomain::setKernelsJacobian(const std::vector<Inter
 
     PYLITH_METHOD_END;
 } // setKernelsJacobian
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Set kernels for Jacobian without finite-element integration.
+void
+pylith::feassemble::IntegratorDomain::setKernelsJacobian(const std::vector<pylith::feassemble::JacobianValues::JacobianKernel>& kernelsJacobian,
+                                                         const std::vector<pylith::feassemble::JacobianValues::JacobianKernel>& kernelsPrecond) {
+    delete _jacobianValues;_jacobianValues = new pylith::feassemble::JacobianValues();assert(_jacobianValues);
+    _jacobianValues->setKernels(kernelsJacobian, kernelsPrecond);
+    _hasLHSJacobian = true;
+} // setJacobianValues
 
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -438,6 +452,16 @@ pylith::feassemble::IntegratorDomain::computeLHSJacobian(PetscMat jacobianMat,
     assert(precondMat);
     err = DMPlexComputeJacobian_Internal(dsLabel.dm(), key, dsLabel.cellsIS(), t, s_tshift, solution.getLocalVector(),
                                          solutionDot.getLocalVector(), jacobianMat, precondMat, NULL);PYLITH_CHECK_ERROR(err);
+
+    if (_jacobianValues) {
+        _jacobianValues->computeLHSJacobian(jacobianMat, precondMat, t, dt, s_tshift, solution, dsLabel);
+        err = MatAssemblyBegin(jacobianMat, MAT_FINAL_ASSEMBLY);PYLITH_CHECK_ERROR(err);
+        err = MatAssemblyEnd(jacobianMat, MAT_FINAL_ASSEMBLY);PYLITH_CHECK_ERROR(err);
+        if (precondMat && ( precondMat != jacobianMat) ) {
+            err = MatAssemblyBegin(precondMat, MAT_FINAL_ASSEMBLY);PYLITH_CHECK_ERROR(err);
+            err = MatAssemblyEnd(precondMat, MAT_FINAL_ASSEMBLY);PYLITH_CHECK_ERROR(err);
+        } // if
+    } // if
 
     PYLITH_METHOD_END;
 } // computeLHSJacobian
