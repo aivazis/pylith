@@ -4,14 +4,14 @@
 //
 // Brad T. Aagaard, U.S. Geological Survey
 // Charles A. Williams, GNS Science
-// Matthew G. Knepley, University of Chicago
+// Matthew G. Knepley, University at Buffalo
 //
 // This code was developed as part of the Computational Infrastructure
 // for Geodynamics (http://geodynamics.org).
 //
-// Copyright (c) 2010-2015 University of California, Davis
+// Copyright (c) 2010-2021 University of California, Davis
 //
-// See COPYING for license information.
+// See LICENSE.md for license information.
 //
 // ----------------------------------------------------------------------
 //
@@ -96,7 +96,7 @@ pylith::mmstests::TestElasticity::_initialize(void) {
         const pylith::topology::FieldBase::Discretization& info = _data->auxDiscretizations[i];
         _material->setAuxiliarySubfieldDiscretization(_data->auxSubfields[i], info.basisOrder, info.quadOrder,
                                                       _data->spaceDim, pylith::topology::FieldBase::DEFAULT_BASIS,
-                                                      info.isBasisContinuous, info.feSpace);
+                                                      info.feSpace, info.isBasisContinuous);
     } // for
 
     // Set up problem.

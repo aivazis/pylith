@@ -4,13 +4,13 @@
 //
 // Brad T. Aagaard, U.S. Geological Survey
 // Charles A. Williams, GNS Science
-// Matthew G. Knepley, University of Chicago
+// Matthew G. Knepley, University at Buffalo
 //
 // This code was developed as part of the Computational Infrastructure
 // for Geodynamics (http://geodynamics.org).
 //
-// Copyright (c) 2010-2015 University of California, Davis//
-// See COPYING for license information.
+// Copyright (c) 2010-2021 University of California, Davis//
+// See LICENSE.md for license information.
 //
 // ======================================================================
 //
@@ -54,7 +54,8 @@ pylith::topology::FieldOps::createFE(const FieldBase::Discretization& feinfo,
     err = DMGetDimension(dm, &dim);PYLITH_CHECK_ERROR(err);
     dim = (feinfo.dimension < 0) ? dim : feinfo.dimension;assert(dim > 0);
     FieldBase::Discretization feKey = FieldBase::Discretization(feinfo.basisOrder, feinfo.quadOrder, dim, numComponents,
-                                                                feinfo.cellBasis, feinfo.isBasisContinuous, feinfo.feSpace);
+                                                                feinfo.isFaultOnly, feinfo.cellBasis, feinfo.feSpace,
+                                                                feinfo.isBasisContinuous);
     std::map<FieldBase::Discretization, pylith::topology::FE>::const_iterator hasFE = pylith::topology::FieldOps::feStore.find(feKey);
 
     if (hasFE == pylith::topology::FieldOps::feStore.end()) {

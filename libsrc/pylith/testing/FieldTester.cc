@@ -4,14 +4,14 @@
 //
 // Brad T. Aagaard, U.S. Geological Survey
 // Charles A. Williams, GNS Science
-// Matthew G. Knepley, University of Chicago
+// Matthew G. Knepley, University at Buffalo
 //
 // This code was developed as part of the Computational Infrastructure
 // for Geodynamics (http://geodynamics.org).
 //
-// Copyright (c) 2010-2015 University of California, Davis
+// Copyright (c) 2010-2021 University of California, Davis
 //
-// See COPYING for license information.
+// See LICENSE.md for license information.
 //
 // ======================================================================
 //
@@ -86,9 +86,10 @@ pylith::testing::FieldTester::checkSubfieldInfo(const pylith::topology::Field& f
     CPPUNIT_ASSERT_EQUAL_MESSAGE(msg.c_str(), feE.basisOrder, fe.basisOrder);
     CPPUNIT_ASSERT_EQUAL_MESSAGE(msg.c_str(), feE.quadOrder, fe.quadOrder);
     CPPUNIT_ASSERT_EQUAL_MESSAGE(msg.c_str(), feE.dimension, fe.dimension);
+    CPPUNIT_ASSERT_EQUAL_MESSAGE(msg.c_str(), feE.isFaultOnly, fe.isFaultOnly);
     CPPUNIT_ASSERT_EQUAL_MESSAGE(msg.c_str(), feE.cellBasis, fe.cellBasis);
-    CPPUNIT_ASSERT_EQUAL_MESSAGE(msg.c_str(), feE.isBasisContinuous, fe.isBasisContinuous);
     CPPUNIT_ASSERT_EQUAL_MESSAGE(msg.c_str(), feE.feSpace, fe.feSpace);
+    CPPUNIT_ASSERT_EQUAL_MESSAGE(msg.c_str(), feE.isBasisContinuous, fe.isBasisContinuous);
 
     PYLITH_METHOD_END;
 } // checkSubfieldInfo

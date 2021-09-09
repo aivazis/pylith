@@ -4,14 +4,14 @@
 //
 // Brad T. Aagaard, U.S. Geological Survey
 // Charles A. Williams, GNS Science
-// Matthew G. Knepley, University of Chicago
+// Matthew G. Knepley, University at Buffalo
 //
 // This code was developed as part of the Computational Infrastructure
 // for Geodynamics (http://geodynamics.org).
 //
-// Copyright (c) 2010-2017 University of California, Davis
+// Copyright (c) 2010-2021 University of California, Davis
 //
-// See COPYING for license information.
+// See LICENSE.md for license information.
 //
 // ----------------------------------------------------------------------
 //
@@ -274,8 +274,8 @@ pylith::topology::TestFieldMesh::testSubfieldAccessors(void) {
         } // for
         CPPUNIT_ASSERT_EQUAL(_data->discretizationA.basisOrder, infoA.fe.basisOrder);
         CPPUNIT_ASSERT_EQUAL(_data->discretizationA.quadOrder, infoA.fe.quadOrder);
-        CPPUNIT_ASSERT_EQUAL(_data->discretizationA.isBasisContinuous, infoA.fe.isBasisContinuous);
         CPPUNIT_ASSERT_EQUAL(_data->discretizationA.feSpace, infoA.fe.feSpace);
+        CPPUNIT_ASSERT_EQUAL(_data->discretizationA.isBasisContinuous, infoA.fe.isBasisContinuous);
     } // Test getSubfieldInfo() for subfield A.
 
     { // Test getSubfieldInfo() for subfield B.
@@ -292,8 +292,8 @@ pylith::topology::TestFieldMesh::testSubfieldAccessors(void) {
         } // for
         CPPUNIT_ASSERT_EQUAL(_data->discretizationB.basisOrder, infoB.fe.basisOrder);
         CPPUNIT_ASSERT_EQUAL(_data->discretizationB.quadOrder, infoB.fe.quadOrder);
-        CPPUNIT_ASSERT_EQUAL(_data->discretizationB.isBasisContinuous, infoB.fe.isBasisContinuous);
         CPPUNIT_ASSERT_EQUAL(_data->discretizationB.feSpace, infoB.fe.feSpace);
+        CPPUNIT_ASSERT_EQUAL(_data->discretizationB.isBasisContinuous, infoB.fe.isBasisContinuous);
     } // Test getSubfieldInfo() for subfield B.
 
     CPPUNIT_ASSERT_THROW(_field->getSubfieldInfo("aabbccdd"), std::runtime_error);

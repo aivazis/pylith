@@ -21,10 +21,9 @@ TESTS = \
 	test_isotropiclinearporoelasticity2d \
 	test_isotropiclinearporoelasticity2d_QS_LT \
 	test_isotropiclinearporoelasticity2d_QS_TT \
-	test_isotropiclinearporoelasticity2d_TS_LT \
 	test_isotropiclinearporoelasticity3d \
 	test_isotropiclinearporoelasticity3d_QS_LT \
-	test_isotropiclinearporoelasticity3d_QS_TT 
+	test_isotropiclinearporoelasticity3d_QS_TT 	
 
 check_PROGRAMS = $(TESTS)
 
@@ -33,7 +32,6 @@ test_isotropiclinearporoelasticity2d_SOURCES = \
 		TestIsotropicLinearPoroelasticity.cc \
 		TestIsotropicLinearPoroelasticity2D_QS_LT.cc \
 		TestIsotropicLinearPoroelasticity2D_QS_TT.cc \
-		TestIsotropicLinearPoroelasticity2D_TS_LT.cc \
 		test_driver.cc
 
 test_isotropiclinearporoelasticity2d_QS_LT_SOURCES = \
@@ -48,16 +46,11 @@ test_isotropiclinearporoelasticity2d_QS_TT_SOURCES = \
 		TestIsotropicLinearPoroelasticity2D_QS_TT.cc \
 		test_driver.cc
 
-test_isotropiclinearporoelasticity2d_TS_LT_SOURCES = \
-		TestPoroelasticity.cc \
-		TestIsotropicLinearPoroelasticity.cc \
-		TestIsotropicLinearPoroelasticity2D_TS_LT.cc \
-		test_driver.cc
-
 test_isotropiclinearporoelasticity3d_SOURCES = \
 		TestPoroelasticity.cc \
 		TestIsotropicLinearPoroelasticity.cc \
 		TestIsotropicLinearPoroelasticity3D_QS_LT.cc \
+		TestIsotropicLinearPoroelasticity3D_QS_TT.cc \
 		test_driver.cc
 
 test_isotropiclinearporoelasticity3d_QS_LT_SOURCES = \
@@ -96,12 +89,7 @@ dist_noinst_DATA = \
 	data/tri.mesh \
 	data/quad.mesh \
 	data/tet.mesh \
-	data/hex.mesh \
-	data/tri_twocells.mesh \
-	data/tri_fourcells.mesh \
-	data/quad_fourcells.mesh \
-	data/tri_onecell.mesh \
-  data/quad_onecell.mesh
+	data/hex.mesh 
 
 noinst_TMP =
 

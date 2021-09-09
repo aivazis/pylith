@@ -52,6 +52,8 @@ This is a `seealso` admonition.
 :::
 
 :::{admonition} TODO
+:class: error
+
 This is a custom `TODO` admonition.
 :::
 
@@ -113,6 +115,19 @@ for i in "a b c"; do
 done
 ```
 
+```{code-block} cfg
+---
+caption: Config code block.
+---
+# Comment
+[pylithapp]
+journal.info.problem = 1
+
+[pylithapp.petsc]
+ksp_rtol = 1.0e-3
+```
+
+
 ## Tables
 
 Please see {numref}`tab-quickref`.
@@ -135,3 +150,8 @@ Please see {numref}`fig-quickref`.
 
 This is the figure caption.
 :::
+
+## Citations
+
+Traditional citation {cite}`Aagaard:etal:2007`.
+Citation as noun {cite:t}`Bathe:1995`.

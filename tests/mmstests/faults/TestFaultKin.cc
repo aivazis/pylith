@@ -4,14 +4,14 @@
 //
 // Brad T. Aagaard, U.S. Geological Survey
 // Charles A. Williams, GNS Science
-// Matthew G. Knepley, University of Chicago
+// Matthew G. Knepley, University at Buffalo
 //
 // This code was developed as part of the Computational Infrastructure
 // for Geodynamics (http://geodynamics.org).
 //
-// Copyright (c) 2010-2015 University of California, Davis
+// Copyright (c) 2010-2021 University of California, Davis
 //
-// See COPYING for license information.
+// See LICENSE.md for license information.
 //
 // ----------------------------------------------------------------------
 //
@@ -99,7 +99,7 @@ pylith::mmstests::TestFaultKin::_initialize(void) {
     for (int i = 0; i < _data->matNumAuxSubfields; ++i) {
         const pylith::topology::FieldBase::Discretization& info = _data->matAuxDiscretizations[i];
         _material->setAuxiliarySubfieldDiscretization(_data->matAuxSubfields[i], info.basisOrder, info.quadOrder,
-                                                      _data->spaceDim, info.cellBasis, info.isBasisContinuous, info.feSpace);
+                                                      _data->spaceDim, info.cellBasis, info.feSpace, info.isBasisContinuous);
     } // for
 
     // Set up fault
@@ -114,7 +114,7 @@ pylith::mmstests::TestFaultKin::_initialize(void) {
     for (int i = 0; i < _data->faultNumAuxSubfields; ++i) {
         const pylith::topology::FieldBase::Discretization& info = _data->faultAuxDiscretizations[i];
         _fault->setAuxiliarySubfieldDiscretization(_data->faultAuxSubfields[i], info.basisOrder, info.quadOrder,
-                                                   _data->spaceDim-1, info.cellBasis, info.isBasisContinuous, info.feSpace);
+                                                   _data->spaceDim-1, info.cellBasis, info.feSpace, info.isBasisContinuous);
     } // for
 
     // Set up problem.

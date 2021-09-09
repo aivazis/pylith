@@ -4,14 +4,14 @@
 //
 // Brad T. Aagaard, U.S. Geological Survey
 // Charles A. Williams, GNS Science
-// Matthew G. Knepley, Rice University
+// Matthew G. Knepley, University at Buffalo
 //
 // This code was developed as part of the Computational Infrastructure
 // for Geodynamics (http://geodynamics.org).
 //
-// Copyright (c) 2010-2015 University of California, Davis
+// Copyright (c) 2010-2021 University of California, Davis
 //
-// See COPYING for license information.
+// See LICENSE.md for license information.
 //
 // ======================================================================
 //
@@ -43,6 +43,10 @@ pylith::feassemble::Integrator::Integrator(pylith::problems::Physics* const phys
     _labelValue(1),
     _lhsJacobianTriggers(NEW_JACOBIAN_NEVER),
     _lhsJacobianLumpedTriggers(NEW_JACOBIAN_NEVER),
+    _hasRHSResidual(false),
+    _hasLHSResidual(false),
+    _hasLHSJacobian(false),
+    _hasLHSJacobianLumped(false),
     _needNewLHSJacobian(true),
     _needNewLHSJacobianLumped(true)
 {}
