@@ -163,8 +163,8 @@ private:
     void _setKernelsJacobian(pylith::feassemble::IntegratorInterface* integrator,
                              const pylith::topology::Field& solution) const;
 
-    // PRIVATE TYPEDEFS ////////////////////////////////////////////////////////////////////////////////////////////////
-private:
+    // PROTECTED TYPEDEFS /////////////////////////////////////////////////////////////////////////////////////////////
+protected:
 
     typedef std::map<std::string, KinSrc*> srcs_type;
 
