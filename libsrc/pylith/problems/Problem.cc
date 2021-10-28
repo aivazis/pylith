@@ -418,7 +418,7 @@ pylith::problems::Problem::_createIntegrators(void) {
 
     for (size_t i = 0; i < numInterfaces; ++i) {
         assert(_interfaces[i]);
-        pylith::feassemble::Integrator* integrator = _interfaces[i]->createIntegrator(*_solution);
+        pylith::feassemble::Integrator* integrator = _interfaces[i]->createIntegrator(*_solution, _materials);
         assert(count < maxSize);
         if (integrator) { _integrators[count++] = integrator;}
     } // for
@@ -449,7 +449,6 @@ pylith::problems::Problem::_createConstraints(void) {
     const size_t numBC = _bc.size();
 
     _constraints.resize(0); // insure we start with an empty array.
-
 
     for (size_t i = 0; i < numMaterials; ++i) {
         assert(_materials[i]);
