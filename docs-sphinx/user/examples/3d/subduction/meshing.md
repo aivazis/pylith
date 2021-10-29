@@ -47,7 +47,7 @@ We recommend carefully examining the `geometry.jou` journal file to understand h
 ## Visualizing the Mesh
 
 The Exodus-II file `mesh_tet.exo` can be viewed with ParaView.
-We provide the Python script `viz/pot_mesh.py` to visualize the nodesets and the mesh quality using the condition number metric.
+We provide the Python script `viz/plot_mesh.py` to visualize the nodesets and the mesh quality using the condition number metric.
 As in our other Python scripts for ParaView (see {ref}`sec:ParaView:Python:scripts` for a discussion of how to use Python ParaView scripts), you can override the default parameters by setting appropriate values in the Python shell (if running within the ParaView GUI) or from the command line (if running the script directly outside the GUI).
 When viewing the nodesets, the animation controls allow stepping through the nodesets.
 When viewing the mesh quality, only the cells with the given quality metric above some threshold (poorer quality) are shown.
@@ -74,5 +74,5 @@ We then click on the `Run Script` button and navigate to the `examples/3d/subduc
 :::{figure-md} fig:example:subduction:3d:mesh
 <img src="figs/subduction3d_mesh.*" alt="Visualization of the `fault_slabtop` nodeset (yellow dots) for the Exodus-II file `mesh/mesh_tet.exo` using the `viz/plot_mesh.py` ParaView Python script. One can step through the different nodesets using the animation controls. This script can also be use to show the mesh quality." width="100%"/>
 
-Visualization of the `fault_slabtop` nodeset (yellow dots) for the Exodus-II file `mesh/mesh_tet.exo` using the `viz/plot_mesh.py` ParaView Python script. One can step through the different nodesets using the animation controls. This script can also be use to show the mesh quality.
+Visualization of the `fault_slabtop` nodeset (yellow dots) for the Exodus-II file `mesh/mesh_tet.exo` using the `viz/plot_mesh.py` ParaView Python script. One can step through the different nodesets using the animation controls. This script can also show the mesh quality.
 :::
