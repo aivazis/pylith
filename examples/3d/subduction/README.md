@@ -121,8 +121,8 @@ To run this example:
 #    - fault_slabtop_slowslip.timedb
 cd spatialdb && ./generate_slowslip.py
 # Change back to the subduction directory and run PyLith
-$ cd ..
-$ pylith step06_slowslip.cfg mat_elastic.cfg solver_fieldsplit.cfg
+cd ..
+pylith step06_slowslip.cfg mat_elastic.cfg solver_fieldsplit.cfg
 ```
 
 
@@ -178,26 +178,26 @@ stresses, and show how viscoelastic problems with gravitational
 stresses will in general not reach a steady-state solution. The
 example is divided into three sub-problems:
 
-  * **Step 8a**: Gravitational body forces with 3-D density variations
+**Step 8a**: Gravitational body forces with 3-D density variations
     in elastic materials and initial stresses for a uniform density.
-  * **Step 8b**: Gravitational body forces with 3-D density variations
+
+**Step 8b**: Gravitational body forces with 3-D density variations
     in incompressible elastic materials.
-  * **Step 8c**: Gravitational body forces with 3-D density variations
+
+**Step 8c**: Gravitational body forces with 3-D density variations
     in elastic and viscoelastic materials and initial stresses from
     Step 8a plus finite strain formulation (does not reach a
     steady-state solution).
 
 To run this example:
+
 ```
 # Step 8a
-pylith step08a_gravity_refstate.cfg mat_elastic.cfg solver_algebraicmultigrid.cfg
+pylith step08a_gravity_refstate.cfg mat_elastic.cfg
 
 # Step 8b
-pylith step08b_gravity_incompressible.cfg mat_incompressible.cfg solver_algebraicmultigrid.cfg
+pylith step08b_gravity_incompressible.cfg mat_incompressible.cfg
 
 # Step 8c
-pylith step08c_gravity_viscoelastic.cfg mat_viscoelastic.cfg solver_algebraicmultigrid.cfg
+pylith step08c_gravity_viscoelastic.cfg mat_viscoelastic.cfg
 ```
-
-\end{shell}
-
