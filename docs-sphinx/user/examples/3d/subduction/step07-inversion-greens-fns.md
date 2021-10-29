@@ -1,4 +1,8 @@
-# Step 7: Inversion of Slow-Slip Event using 3-D Green's Functions
+# Step 7: Inversion of Slow-Slip Event using 3D Green's Functions
+
+:::{error}
+This example has not been updated for v3 because the Green's function problem has not been re-implemented in the multiphysics formulation.
+:::
 
 This example is a three-dimensional analog of {ref}`sec:example:greensfns2d` and is a more realistic example of how PyLith can be used to perform geodetic inversions.
 We divide generating Green's functions for slip impulses on the central rupture patch of the subduction interface two sub-problems:
