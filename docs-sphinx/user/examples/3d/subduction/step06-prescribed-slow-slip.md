@@ -1,5 +1,9 @@
 # Step 6: Prescribed Slow-Slip Event
 
+:::{admonition} TODO
+The example files need to be updated.
+:::
+
 This example simulates a simple slow slip event (SSE) on the subduction interface, in which the entire patch slips simultaneously with an amplitude that grows with time.
 We impose a constant rake angle of 110 degrees, and a time duration of 30 days.
 The time duration is much shorter than the Maxwell time for our viscoelastic materials, so we use elastic material properties (as we did in Step 1).
@@ -7,7 +11,8 @@ The time duration is much shorter than the Maxwell time for our viscoelastic mat
 :::{figure-md} fig:example:subduction:3d:step06:diagram
 <img src="figs/subduction3d_step06_diagram.*" alt="Diagram of Step 6 - Prescribed slow-slip event on the subduction interface. This quasistatic simulation prescribes a Gaussian slip distribution on the central rupture patch of the subduction interface, purely elastic material properties, and roller boundary conditions on the lateral (north, south, east, and west) and bottom boundaries." width="100%"/>
 
-Diagram of Step 6 - Prescribed slow-slip event on the subduction interface. This quasistatic simulation prescribes a Gaussian slip distribution on the central rupture patch of the subduction interface, purely elastic material properties, and roller boundary conditions on the lateral (north, south, east, and west) and bottom boundaries.
+Diagram of Step 6 - Prescribed slow-slip event on the subduction interface.
+This quasistatic simulation prescribes a Gaussian slip distribution on the central rupture patch of the subduction interface, purely elastic material properties, and roller boundary conditions on the lateral (north, south, east, and west) and bottom boundaries.
 :::
 
 The only time dependence in this problem is the time evolution of slip, so we set the duration of the simulation to match the duration of the slow slip event.
