@@ -368,7 +368,7 @@ pylith::feassemble::IntegratorInterface::setKernels(const std::vector<JacobianKe
     } // if
 
     PYLITH_METHOD_END;
-} // setKernelsJacobian
+} // setKernels
 
 
 // ------------------------------------------------------------------------------------------------
