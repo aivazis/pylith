@@ -27,7 +27,7 @@ def generate_mesh(cell="tri"):
 
     gmsh.model.geo.synchronize()
 
-    boundary = gmsh.model.addPhysicalGroup(0, [e0, e1, e2, e3])
+    boundary = gmsh.model.addPhysicalGroup(1, [e0, e1, e2, e3])
     gmsh.model.setPhysicalName(1, boundary, "boundary")
 
     material = gmsh.model.addPhysicalGroup(2, [s0], 24)
