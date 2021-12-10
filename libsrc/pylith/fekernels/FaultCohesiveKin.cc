@@ -33,43 +33,6 @@
  * ======================================================================
  */
 
-namespace pylith {
-    namespace fekernels {
-        class _FaultCohesiveKin {
-public:
-
-            /** Get offset in s where Lagrange multiplier subfield starts.
-             *
-             * Normally this would be sOff, but sOff doesn't account for having DOF for the two sides of the fault
-             * passed to the hybrid kernels. This functions computes the correct offset into s for the Lagrange
-             * multiplier subfield.
-             *
-             * @param[in] sOff Offset of registered subfields in solution field [numS].
-             * @param[in] numS Number of registered subfields in solution field.
-             *
-             * @returns Offset of Lagrange multiplier subfield in s.
-             */
-            static PylithInt lagrange_sOff(const PylithInt sOff[],
-                                           const PylithInt numS);
-
-        }; // _FaultCohesiveKin
-    } // fekernels
-} // pylith
-
-// ----------------------------------------------------------------------
-// Get offset in s where Lagrange multiplier field starts.
-PylithInt
-pylith::fekernels::_FaultCohesiveKin::lagrange_sOff(const PylithInt sOff[],
-                                                    const PylithInt numS) {
-    PylithInt off = 0;
-    const PylithInt numCount = numS - 1; // :KLUDGE: Assumes there is only 1 fault (hybrid) field.
-    for (PylithInt i = 0; i < numCount; ++i) {
-        off += 2*(sOff[i+1] - sOff[i]);
-    } // for
-    return off;
-} // lagrange_sOff
-
-
 // ----------------------------------------------------------------------
 // f0 function for elasticity equation: f0u = -\lambda (pos side), +\lambda (neg side).
 void
@@ -100,7 +63,7 @@ pylith::fekernels::FaultCohesiveKin::f0u_neg(const PylithInt dim,
 
     const PylithInt spaceDim = dim + 1; // :KLUDGE: dim passed in is spaceDim-1
 
-    const PylithInt sOffLagrange = pylith::fekernels::_FaultCohesiveKin::lagrange_sOff(sOff, numS);
+    const PylithInt sOffLagrange = sOff[numS-1];
     const PylithScalar* lagrange = &s[sOffLagrange];
 
     for (PylithInt i = 0; i < spaceDim; ++i) {
@@ -139,7 +102,7 @@ pylith::fekernels::FaultCohesiveKin::f0u_pos(const PylithInt dim,
 
     const PylithInt spaceDim = dim + 1; // :KLUDGE: dim passed in is spaceDim-1
 
-    const PylithInt sOffLagrange = pylith::fekernels::_FaultCohesiveKin::lagrange_sOff(sOff, numS);
+    const PylithInt sOffLagrange = sOff[numS-1];
     const PylithScalar* lagrange = &s[sOffLagrange];
 
     for (PylithInt i = 0; i < spaceDim; ++i) {
